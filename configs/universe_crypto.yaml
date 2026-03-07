@@ -1,0 +1,44 @@
+# Crypto Universe Configuration
+# Extends SGI analysis to cryptocurrency markets
+
+inherits: base.yaml
+
+universe:
+  name: "crypto"
+  tickers:
+    - "BTC-USD"
+    - "ETH-USD"
+    - "BNB-USD"
+    - "XRP-USD"
+    - "ADA-USD"
+    - "SOL-USD"
+    - "DOGE-USD"
+    - "DOT-USD"
+    - "AVAX-USD"
+    - "MATIC-USD"
+    - "LINK-USD"
+    - "UNI-USD"
+    - "ATOM-USD"
+    - "LTC-USD"
+    - "ETC-USD"
+  market_proxy: "BTC-USD"
+
+data:
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+  return_type: "log"
+
+covariance:
+  estimator: "ewma"
+  rolling_window: 60
+  ewma_span: 30
+
+geometry:
+  top_k: 3
+
+targets:
+  horizons: [1, 5, 10, 20]
+  drawdown_threshold: 0.10
+
+outputs:
+  experiment_tag: "crypto"

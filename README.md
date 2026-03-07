@@ -87,14 +87,35 @@ spectral_geometry_instability/
 │   ├── plots.py              # Visualization
 │   ├── event_study.py        # Event analysis
 │   ├── experiments.py        # Pipeline orchestration
-│   └── diagnostics.py        # Data quality checks
+│   ├── diagnostics.py        # Data quality checks
+│   ├── bootstrap.py          # Statistical inference
+│   ├── vix_integration.py    # VIX control variable
+│   ├── rmt_denoising.py      # RMT eigenvalue filtering
+│   ├── quantile_regression.py # Tail risk prediction
+│   ├── multiscale_sgi.py     # Multi-scale analysis
+│   ├── cross_market_spillovers.py # Contagion analysis
+│   ├── factor_model.py       # Factor integration
+│   └── crypto_universe.py    # Crypto extension
 │
 ├── experiments/              # Experiment scripts
 │   ├── run_signal_experiment.py
 │   ├── run_predictive_experiment.py
 │   ├── run_portfolio_experiment.py
 │   ├── run_event_study.py
+│   ├── run_vix_analysis.py
+│   ├── run_rmt_analysis.py
+│   ├── run_quantile_analysis.py
+│   ├── run_multiscale_analysis.py
+│   ├── run_spillover_analysis.py
+│   ├── run_factor_analysis.py
+│   ├── run_crypto_analysis.py
 │   └── sweep_*.py            # Robustness sweeps
+│
+├── docs/                     # Documentation
+│   ├── USER_GUIDE.md         # Complete user guide
+│   ├── QUICKSTART.md         # Quick start guide
+│   ├── API_REFERENCE.md      # API documentation
+│   └── EXAMPLES.md           # Code examples
 │
 ├── notebooks/                # Jupyter notebooks
 │   ├── 01_data_validation.ipynb
@@ -220,13 +241,57 @@ python run_all.py
 
 ---
 
-## Future Work
+## Advanced Features (NEW)
 
-- Random Matrix Theory denoising
-- Multi-scale SGI (short/medium/long windows)
-- Cross-market spillover analysis
-- Hidden regime models
-- Factor model integration
+All previously planned extensions are now implemented:
+
+| Feature | Module | Description |
+|---------|--------|-------------|
+| **VIX Integration** | `src/vix_integration.py` | VIX as control variable, SGI-VIX relationship analysis |
+| **RMT Denoising** | `src/rmt_denoising.py` | Marcenko-Pastur eigenvalue filtering |
+| **Quantile Regression** | `src/quantile_regression.py` | Tail risk prediction, VaR exceedance tests |
+| **Multi-scale SGI** | `src/multiscale_sgi.py` | SGI at multiple windows, term structure |
+| **Cross-market Spillovers** | `src/cross_market_spillovers.py` | Diebold-Yilmaz spillover index, Granger causality |
+| **Factor Model Integration** | `src/factor_model.py` | Factor loading instability, residual SGI |
+| **Crypto Universe** | `src/crypto_universe.py` | Cryptocurrency SGI analysis |
+
+### Running Advanced Experiments
+
+```bash
+# VIX Analysis
+python experiments/run_vix_analysis.py
+
+# RMT Denoising
+python experiments/run_rmt_analysis.py
+
+# Quantile Regression
+python experiments/run_quantile_analysis.py
+
+# Multi-scale SGI
+python experiments/run_multiscale_analysis.py
+
+# Cross-market Spillovers
+python experiments/run_spillover_analysis.py
+
+# Factor Model Integration
+python experiments/run_factor_analysis.py
+
+# Crypto Analysis
+python experiments/run_crypto_analysis.py
+```
+
+---
+
+## Documentation
+
+Comprehensive documentation is available in the `docs/` folder:
+
+| Document | Description |
+|----------|-------------|
+| [User Guide](docs/USER_GUIDE.md) | Complete guide to using the SGI pipeline |
+| [Quick Start](docs/QUICKSTART.md) | Get running in 5 minutes |
+| [API Reference](docs/API_REFERENCE.md) | Full API documentation |
+| [Examples](docs/EXAMPLES.md) | Practical code examples |
 
 ---
 
