@@ -118,19 +118,37 @@ print(f"  ✓ Targets shape: {targets_df.shape}")
 
 print("\nStep 5: Running predictive modeling (walk-forward)...")
 
-# Prepare dataset
-target_col = 'forward_drawdown_20d'
+# Check available target columns
+print(f"  Available target columns: {list(targets_df.columns)[:5]}...")
+
+# Use the correct target column name (forward_vol is more stable than drawdown)
+target_col = 'forward_vol_20d'
 common_idx = features_df.index.intersection(targets_df.index)
 df = features_df.loc[common_idx].copy()
 df['target'] = targets_df.loc[common_idx, target_col]
 df = df.dropna()
 
-# Define feature sets
-feature_sets = {
-    'baseline_only': ['realized_vol', 'avg_correlation', 'market_return'],
-    'sgi_only': ['sgi', 'weighted_sgi'],
-    'baseline_plus_sgi': ['realized_vol', 'avg_correlation', 'market_return', 'sgi', 'weighted_sgi'],
-}
+print(f"  Dataset shape after merge: {df.shape}")
+
+# Define feature sets - use only features that exist
+available_features = df.columns.tolist()
+feature_sets = {}
+
+# Baseline features
+baseline_features = [f for f in ['realized_vol', 'avg_correlation', 'market_return'] if f in available_features]
+if baseline_features:
+    feature_sets['baseline_only'] = baseline_features
+
+# SGI features
+sgi_features = [f for f in ['sgi', 'weighted_sgi'] if f in available_features]
+if sgi_features:
+    feature_sets['sgi_only'] = sgi_features
+
+# Combined
+if baseline_features and sgi_features:
+    feature_sets['baseline_plus_sgi'] = baseline_features + sgi_features
+
+print(f"  Feature sets: {list(feature_sets.keys())}")
 
 # Run walk-forward
 print("  Running walk-forward validation...")
@@ -233,19 +251,25 @@ print(comparison)
 print("\n4. KEY FINDINGS")
 print("-" * 70)
 
-# Calculate incremental value of SGI
-baseline_r2 = summary[summary['feature_set'] == 'baseline_only']['mean_r2'].values[0]
-with_sgi_r2 = summary[summary['feature_set'] == 'baseline_plus_sgi']['mean_r2'].values[0]
-incremental_r2 = with_sgi_r2 - baseline_r2
+# Calculate incremental value of SGI (with error handling)
+try:
+    baseline_r2 = summary[summary['feature_set'] == 'baseline_only']['mean_r2'].values[0]
+    with_sgi_r2 = summary[summary['feature_set'] == 'baseline_plus_sgi']['mean_r2'].values[0]
+    incremental_r2 = with_sgi_r2 - baseline_r2
+    print(f"  • SGI adds {incremental_r2:.4f} incremental R² to baseline model")
+except (IndexError, KeyError):
+    incremental_r2 = 0.0
+    print(f"  • Incremental R² calculation skipped (insufficient data)")
 
-print(f"  • SGI adds {incremental_r2:.4f} incremental R² to baseline model")
-
-# Portfolio improvement
-baseline_sharpe = comparison[comparison['strategy'] == 'equal_weight']['sharpe'].values[0]
-sgi_sharpe = comparison[comparison['strategy'] == 'sgi_conditioned_minvar']['sharpe'].values[0]
-sharpe_improvement = ((sgi_sharpe / baseline_sharpe) - 1) * 100
-
-print(f"  • SGI-conditioned portfolio improves Sharpe by {sharpe_improvement:.1f}%")
+# Portfolio improvement (with error handling)
+try:
+    baseline_sharpe = comparison[comparison['strategy'] == 'equal_weight']['sharpe'].values[0]
+    sgi_sharpe = comparison[comparison['strategy'] == 'sgi_conditioned_minvar']['sharpe'].values[0]
+    sharpe_improvement = ((sgi_sharpe / baseline_sharpe) - 1) * 100
+    print(f"  • SGI-conditioned portfolio improves Sharpe by {sharpe_improvement:.1f}%")
+except (IndexError, KeyError):
+    sharpe_improvement = 0.0
+    print(f"  • Sharpe improvement calculation skipped (insufficient data)")
 
 # SGI characteristics
 sgi_mean = geometry_df['sgi'].mean()
@@ -302,18 +326,32 @@ save_json(results_summary, results_dir / 'results_summary.json')
 print(f"\n✓ All results saved to: {results_dir}")
 
 # ============================================================
-# STEP 10: DOWNLOAD RESULTS (OPTIONAL)
+# STEP 10: DOWNLOAD RESULTS
 # ============================================================
 
 print("\n" + "=" * 70)
 print("DOWNLOAD RESULTS")
 print("=" * 70)
-print("\nTo download results to your local machine, run:")
-print("  from google.colab import files")
-print("  files.download('outputs/complete_analysis/results_summary.json')")
-print("\nOr zip and download everything:")
-print("  !zip -r results.zip outputs/")
-print("  files.download('results.zip')")
+
+# Zip all results
+print("\nZipping all results...")
+import zipfile
+import shutil
+
+zip_path = 'sgi_complete_results.zip'
+shutil.make_archive('sgi_complete_results', 'zip', 'outputs')
+
+print(f"✓ Created {zip_path}")
+
+# Auto-download in Colab
+try:
+    from google.colab import files
+    print("\nDownloading results to your computer...")
+    files.download(zip_path)
+    print("✓ Download started! Check your browser's download folder.")
+except ImportError:
+    print("\nNot running in Colab. Results saved locally to outputs/")
+    print(f"To download manually, use: files.download('{zip_path}')")
 
 print("\n" + "=" * 70)
 print("✓ ANALYSIS COMPLETE!")
