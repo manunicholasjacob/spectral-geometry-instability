@@ -168,8 +168,10 @@ bash setup.sh
 ```python
 !git clone https://github.com/manunicholasjacob/spectral-geometry-instability.git
 %cd spectral-geometry-instability
-!pip install -r requirements.txt
+!python colab_setup.py
 ```
+
+See [COLAB_QUICKSTART.md](COLAB_QUICKSTART.md) for detailed Colab instructions.
 
 ---
 
