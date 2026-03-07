@@ -5,7 +5,7 @@
 ### Manu Nicholas Jacob
 - **Email**: manunicholasjacob@gmail.com
 - **GitHub**: [@manunicholasjacob](https://github.com/manunicholasjacob)
-- **Role**: Lead Developer, Research Design
+- **Role**: Co Developer, Research Design
 
 ### Ronit Ghai
 - **Email**: ronitghai@hotmail.com
