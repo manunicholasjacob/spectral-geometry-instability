@@ -1,0 +1,2 @@
+# This file ensures the raw/ directory is tracked by Git
+# The directory itself should remain empty - data files are downloaded at runtime
