@@ -1,0 +1,60 @@
+# Default configuration for robustness sweeps
+
+sweeps:
+  windows:
+    - 60
+    - 126
+    - 252
+    - 504
+  
+  top_k:
+    - 2
+    - 3
+    - 5
+    - 8
+  
+  estimators:
+    - "sample"
+    - "ewma"
+    - "ledoit_wolf"
+  
+  horizons:
+    - 5
+    - 10
+    - 20
+    - 60
+  
+  rebalance_frequencies:
+    - "daily"
+    - "weekly"
+    - "monthly"
+  
+  transaction_costs_bps:
+    - 0
+    - 5
+    - 10
+    - 25
+  
+  sgi_thresholds:
+    percentiles:
+      - 50
+      - 60
+      - 70
+      - 75
+      - 80
+      - 90
+    zscores:
+      - 0.5
+      - 1.0
+      - 1.5
+      - 2.0
+
+universes:
+  - "sector_etfs"
+  - "multiasset"
+  - "largecap50"
+
+output:
+  save_individual_results: true
+  save_summary_table: true
+  generate_heatmaps: true

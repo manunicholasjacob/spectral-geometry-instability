@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.env
+.venv
+venv/
+env/
+ENV/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Data (large files)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Outputs (experiment results)
+outputs/*
+!outputs/.gitkeep
+!outputs/figures/.gitkeep
+!outputs/tables/.gitkeep
+!outputs/logs/.gitkeep
+!outputs/diagnostics/.gitkeep
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.temp
+
+# Colab/pickle artifacts
+*.pickle
+*.pkl
+*.joblib
+
+# Large model files
+*.h5
+*.hdf5
+*.parquet

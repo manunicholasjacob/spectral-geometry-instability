@@ -1,0 +1,31 @@
+# Configuration for Sector ETFs universe
+# Inherits from base.yaml
+
+universe:
+  name: "sector_etfs"
+  description: "US Sector ETFs - interpretable baseline universe"
+  tickers:
+    - "XLF"   # Financials
+    - "XLK"   # Technology
+    - "XLE"   # Energy
+    - "XLV"   # Healthcare
+    - "XLY"   # Consumer Discretionary
+    - "XLP"   # Consumer Staples
+    - "XLI"   # Industrials
+    - "XLU"   # Utilities
+    - "XLB"   # Materials
+    - "XLRE"  # Real Estate
+  market_proxy: "SPY"
+
+data:
+  start_date: "2005-01-01"
+  end_date: "2024-12-31"
+
+covariance:
+  rolling_window: 126
+
+geometry:
+  top_k: 3
+
+outputs:
+  experiment_tag: "sector_etfs"

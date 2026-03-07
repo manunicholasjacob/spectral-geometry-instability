@@ -1,0 +1,65 @@
+# Default configuration for predictive experiments
+
+modeling:
+  model_type: "linear"
+  train_years: 3
+  test_years: 1
+  min_train_obs: 252
+  
+  targets:
+    - "forward_drawdown_5d"
+    - "forward_drawdown_20d"
+    - "forward_vol_5d"
+    - "forward_vol_20d"
+    - "forward_correlation_20d"
+    - "cov_forecast_error_20d"
+  
+  feature_sets:
+    baseline_only:
+      - "realized_vol"
+      - "avg_correlation"
+      - "market_return"
+      - "cross_sectional_dispersion"
+    
+    spectral_baseline:
+      - "realized_vol"
+      - "avg_correlation"
+      - "absorption_ratio"
+      - "eigen_concentration"
+    
+    sgi_only:
+      - "sgi"
+      - "weighted_sgi"
+      - "max_angle"
+      - "mean_angle"
+    
+    baseline_plus_sgi:
+      - "realized_vol"
+      - "avg_correlation"
+      - "market_return"
+      - "sgi"
+      - "weighted_sgi"
+    
+    full:
+      - "realized_vol"
+      - "avg_correlation"
+      - "market_return"
+      - "cross_sectional_dispersion"
+      - "absorption_ratio"
+      - "eigen_concentration"
+      - "sgi"
+      - "weighted_sgi"
+      - "max_angle"
+      - "mean_angle"
+
+evaluation:
+  metrics:
+    regression:
+      - "mse"
+      - "mae"
+      - "r2"
+    classification:
+      - "auroc"
+      - "accuracy"
+      - "precision"
+      - "recall"

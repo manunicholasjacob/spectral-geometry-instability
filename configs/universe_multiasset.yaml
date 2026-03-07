@@ -1,0 +1,31 @@
+# Configuration for Multi-Asset ETFs universe
+# Inherits from base.yaml
+
+universe:
+  name: "multiasset"
+  description: "Multi-Asset ETFs - cross-asset class testing"
+  tickers:
+    - "SPY"   # US Large Cap Equity
+    - "EFA"   # International Developed Equity
+    - "EEM"   # Emerging Markets Equity
+    - "TLT"   # Long-Term Treasury Bonds
+    - "IEF"   # Intermediate Treasury Bonds
+    - "LQD"   # Investment Grade Corporate Bonds
+    - "HYG"   # High Yield Corporate Bonds
+    - "GLD"   # Gold
+    - "DBC"   # Commodities
+    - "VNQ"   # Real Estate
+  market_proxy: "SPY"
+
+data:
+  start_date: "2007-01-01"  # Some ETFs start later
+  end_date: "2024-12-31"
+
+covariance:
+  rolling_window: 126
+
+geometry:
+  top_k: 3
+
+outputs:
+  experiment_tag: "multiasset"

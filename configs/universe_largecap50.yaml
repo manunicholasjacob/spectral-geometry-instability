@@ -1,0 +1,71 @@
+# Configuration for Large-Cap 50 universe
+# Inherits from base.yaml
+
+universe:
+  name: "largecap50"
+  description: "Top 50 S&P 500 stocks - rich cross-sectional structure"
+  tickers:
+    - "AAPL"
+    - "MSFT"
+    - "AMZN"
+    - "NVDA"
+    - "GOOGL"
+    - "META"
+    - "BRK-B"
+    - "UNH"
+    - "XOM"
+    - "JNJ"
+    - "JPM"
+    - "V"
+    - "PG"
+    - "MA"
+    - "HD"
+    - "CVX"
+    - "MRK"
+    - "ABBV"
+    - "LLY"
+    - "PEP"
+    - "KO"
+    - "COST"
+    - "AVGO"
+    - "WMT"
+    - "MCD"
+    - "CSCO"
+    - "TMO"
+    - "ACN"
+    - "ABT"
+    - "DHR"
+    - "NEE"
+    - "LIN"
+    - "ADBE"
+    - "NKE"
+    - "TXN"
+    - "PM"
+    - "WFC"
+    - "CRM"
+    - "BMY"
+    - "UPS"
+    - "RTX"
+    - "ORCL"
+    - "MS"
+    - "QCOM"
+    - "HON"
+    - "INTC"
+    - "IBM"
+    - "CAT"
+    - "GE"
+    - "BA"
+  market_proxy: "SPY"
+
+data:
+  start_date: "2010-01-01"  # Ensure all stocks have data
+  end_date: "2024-12-31"
+
+covariance:
+  rolling_window: 252  # Longer window for larger universe
+
+geometry:
+  top_k: 5  # More eigenvectors for larger universe
+
+outputs:
+  experiment_tag: "largecap50"

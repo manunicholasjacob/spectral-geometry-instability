@@ -1,0 +1,58 @@
+# Default configuration for portfolio experiments
+
+portfolio:
+  strategies:
+    - "equal_weight"
+    - "inverse_vol"
+    - "min_variance"
+    - "shrinkage_minvar"
+    - "sgi_conditioned_minvar"
+    - "sgi_conditioned_shrinkage"
+  
+  long_only: true
+  max_weight: 0.25
+  min_weight: 0.0
+  
+  sgi_conditioning:
+    threshold_type: "percentile"  # "percentile" or "zscore"
+    threshold_percentile: 75
+    threshold_zscore: 1.5
+    shrinkage_alpha_low: 0.0
+    shrinkage_alpha_high: 0.5
+    leverage_scale_low: 1.0
+    leverage_scale_high: 0.5
+
+backtest:
+  rebalance_frequencies:
+    - "daily"
+    - "weekly"
+    - "monthly"
+  
+  transaction_costs_bps:
+    - 0
+    - 5
+    - 10
+    - 25
+  
+  initial_capital: 1000000
+  
+  metrics:
+    - "total_return"
+    - "cagr"
+    - "volatility"
+    - "sharpe"
+    - "sortino"
+    - "max_drawdown"
+    - "calmar"
+    - "turnover"
+
+crisis_periods:
+  gfc_2008:
+    start: "2008-09-01"
+    end: "2009-03-31"
+  covid_2020:
+    start: "2020-02-15"
+    end: "2020-04-30"
+  inflation_2022:
+    start: "2022-01-01"
+    end: "2022-10-31"
