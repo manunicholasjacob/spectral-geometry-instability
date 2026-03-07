@@ -21,7 +21,7 @@ If you use this code in your research, please cite:
 @software{sgi2024,
   title={Spectral Geometry Instability: Subspace Rotation as a Structural Risk Signal},
   author={Jacob, Manu Nicholas and Ghai, Ronit},
-  year={2024},
+  year={2026},
   url={https://github.com/manunicholasjacob/spectral-geometry-instability}
 }
 ```
