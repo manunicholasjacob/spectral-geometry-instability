@@ -295,6 +295,16 @@ Comprehensive documentation is available in the `docs/` folder:
 
 ---
 
+## Authors
+
+**Manu Nicholas Jacob**  
+Email: manunicholasjacob@gmail.com
+
+**Ronit Ghai**  
+Email: ronitghai@hotmail.com
+
+---
+
 ## Citation
 
 If you use this code in your research, please cite:
@@ -302,7 +312,7 @@ If you use this code in your research, please cite:
 ```
 @software{sgi2024,
   title={Spectral Geometry Instability: Subspace Rotation as a Structural Risk Signal},
-  author={Jacob, Manu Nicholas},
+  author={Jacob, Manu Nicholas and Ghai, Ronit},
   year={2024},
   url={https://github.com/manunicholasjacob/spectral-geometry-instability}
 }
@@ -313,3 +323,5 @@ If you use this code in your research, please cite:
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
+
+Copyright (c) 2024 Manu Nicholas Jacob and Ronit Ghai

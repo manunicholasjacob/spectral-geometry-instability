@@ -97,4 +97,11 @@ print(f"Max SGI: {sgi.max():.4f}")
 
 ---
 
+## Authors
+
+**Manu Nicholas Jacob** (manunicholasjacob@gmail.com)  
+**Ronit Ghai** (ronitghai@hotmail.com)
+
+---
+
 *Happy researching!*

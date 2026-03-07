@@ -267,4 +267,11 @@ results = run_signal_pipeline(custom_config)
 
 ---
 
+## Authors
+
+**Manu Nicholas Jacob** (manunicholasjacob@gmail.com)  
+**Ronit Ghai** (ronitghai@hotmail.com)
+
+---
+
 *See notebooks for more detailed examples with visualizations.*

@@ -496,4 +496,11 @@ SUPPORTED_ESTIMATORS = ['sample', 'ewma', 'ledoit_wolf', 'oas']
 
 ---
 
+## Authors
+
+**Manu Nicholas Jacob** (manunicholasjacob@gmail.com)  
+**Ronit Ghai** (ronitghai@hotmail.com)
+
+---
+
 *For detailed docstrings, see the source code.*

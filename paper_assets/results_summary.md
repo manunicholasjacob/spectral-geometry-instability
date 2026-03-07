@@ -2,6 +2,7 @@
 
 ## Project: Spectral Geometry Instability (SGI)
 
+**Authors**: Manu Nicholas Jacob, Ronit Ghai  
 **Last Updated**: [Auto-generated on experiment run]
 
 ---

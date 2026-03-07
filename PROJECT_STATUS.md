@@ -2,6 +2,7 @@
 
 ## Spectral Geometry Instability (SGI) Research Pipeline
 
+**Authors**: Manu Nicholas Jacob, Ronit Ghai  
 **Last Updated**: 2024  
 **Version**: 0.2.0
 

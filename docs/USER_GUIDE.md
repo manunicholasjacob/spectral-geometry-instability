@@ -651,4 +651,11 @@ universe:
 
 ---
 
+## Authors
+
+**Manu Nicholas Jacob** (manunicholasjacob@gmail.com)  
+**Ronit Ghai** (ronitghai@hotmail.com)
+
+---
+
 *Happy researching!*
