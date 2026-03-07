@@ -16,23 +16,26 @@ Repository: https://github.com/manunicholasjacob/spectral-geometry-instability
 print("=" * 70)
 print("SPECTRAL GEOMETRY INSTABILITY (SGI) - COMPLETE ANALYSIS")
 print("=" * 70)
-print("\nStep 1: Cloning repository and installing dependencies...")
+print("\nStep 1: Setup...")
 
 import subprocess
 import sys
 from pathlib import Path
-
-# Clone repository
-subprocess.run(["git", "clone", "https://github.com/manunicholasjacob/spectral-geometry-instability.git"], check=True)
-
-# Change to project directory
 import os
-os.chdir("spectral-geometry-instability")
 
-# Install dependencies
-subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"], check=True)
-
-print("✓ Setup complete!")
+# Check if we're already in the project directory or need to clone
+current_dir = Path.cwd()
+if (current_dir / 'src' / 'spectral_geometry.py').exists():
+    # Already in project directory (local run)
+    print("✓ Running from local project directory")
+    print("✓ Skipping clone and dependency install (already set up)")
+else:
+    # Need to clone (Colab run)
+    print("Cloning repository and installing dependencies...")
+    subprocess.run(["git", "clone", "https://github.com/manunicholasjacob/spectral-geometry-instability.git"], check=True)
+    os.chdir("spectral-geometry-instability")
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"], check=True)
+    print("✓ Setup complete!")
 
 # ============================================================
 # STEP 2: IMPORT MODULES
@@ -143,10 +146,21 @@ print(f"  Using target column: {target_col}")
 # Merge features and targets
 common_idx = features_df.index.intersection(targets_df.index)
 df = features_df.loc[common_idx].copy()
-df['target'] = targets_df.loc[common_idx, target_col]
+
+# Add target column - ensure it exists before adding
+if target_col in targets_df.columns:
+    df[target_col] = targets_df.loc[common_idx, target_col]
+else:
+    raise ValueError(f"Target column '{target_col}' not found in targets_df. Available: {list(targets_df.columns)}")
+
+# Drop rows with NaN in target column specifically
+df = df.dropna(subset=[target_col])
+
+# Replace inf values with NaN and drop
+df = df.replace([np.inf, -np.inf], np.nan)
 df = df.dropna()
 
-print(f"  Dataset shape after merge: {df.shape}")
+print(f"  Dataset shape after merge and cleaning: {df.shape}")
 
 # Define feature sets - use only features that exist
 available_features = df.columns.tolist()
@@ -231,7 +245,8 @@ for strategy in strategies:
     backtest_results = run_rebalancing_backtest(
         prices, weight_schedules[strategy], transaction_cost_bps=10
     )
-    cumulative = (1 + backtest_results['portfolio_returns']).cumprod()
+    # Use net_returns from backtest results
+    cumulative = (1 + backtest_results['net_returns']).cumprod()
     ax.plot(cumulative.index, cumulative.values, label=strategy, linewidth=2)
 
 ax.set_title('Portfolio Performance Comparison', fontsize=14, fontweight='bold')

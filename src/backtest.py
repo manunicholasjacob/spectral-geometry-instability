@@ -143,12 +143,12 @@ def compute_backtest_metrics(
     
     # Worst periods
     metrics["worst_day"] = float(portfolio_returns.min())
-    metrics["worst_month"] = float(portfolio_returns.resample('M').sum().min())
-    metrics["worst_year"] = float(portfolio_returns.resample('Y').sum().min())
+    metrics["worst_month"] = float(portfolio_returns.resample('ME').sum().min())
+    metrics["worst_year"] = float(portfolio_returns.resample('YE').sum().min())
     
     # Best periods
     metrics["best_day"] = float(portfolio_returns.max())
-    metrics["best_month"] = float(portfolio_returns.resample('M').sum().max())
+    metrics["best_month"] = float(portfolio_returns.resample('ME').sum().max())
     
     return metrics
 
