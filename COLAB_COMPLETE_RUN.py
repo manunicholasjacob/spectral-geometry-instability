@@ -119,10 +119,28 @@ print(f"  ✓ Targets shape: {targets_df.shape}")
 print("\nStep 5: Running predictive modeling (walk-forward)...")
 
 # Check available target columns
-print(f"  Available target columns: {list(targets_df.columns)[:5]}...")
+print(f"  Available target columns: {list(targets_df.columns)[:10]}...")
 
-# Use the correct target column name (forward_vol is more stable than drawdown)
-target_col = 'forward_vol_20d'
+# Find the best available target column (prefer 20d, fallback to others)
+possible_targets = ['forward_vol_20d', 'forward_vol_10d', 'forward_vol_5d', 
+                   'forward_drawdown_20d', 'forward_drawdown_10d']
+target_col = None
+for col in possible_targets:
+    if col in targets_df.columns:
+        target_col = col
+        break
+
+if target_col is None:
+    # Use the first available forward target
+    forward_cols = [c for c in targets_df.columns if c.startswith('forward_')]
+    if forward_cols:
+        target_col = forward_cols[0]
+    else:
+        raise ValueError("No suitable target columns found!")
+
+print(f"  Using target column: {target_col}")
+
+# Merge features and targets
 common_idx = features_df.index.intersection(targets_df.index)
 df = features_df.loc[common_idx].copy()
 df['target'] = targets_df.loc[common_idx, target_col]
