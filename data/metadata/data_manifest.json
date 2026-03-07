@@ -1,0 +1,89 @@
+{
+  "project": "Spectral Geometry Instability (SGI)",
+  "version": "0.2.0",
+  "last_updated": "2024",
+  "data_sources": {
+    "yahoo_finance": {
+      "provider": "Yahoo Finance",
+      "library": "yfinance",
+      "cost": "FREE",
+      "coverage": "1990s-present",
+      "frequency": "daily",
+      "assets": {
+        "sector_etfs": ["XLF", "XLK", "XLE", "XLV", "XLY", "XLP", "XLI", "XLU", "XLB", "XLRE"],
+        "multiasset_etfs": ["SPY", "EFA", "EEM", "TLT", "IEF", "LQD", "HYG", "GLD", "DBC", "VNQ"],
+        "largecap_stocks": 50,
+        "crypto": ["BTC-USD", "ETH-USD", "BNB-USD", "ADA-USD", "SOL-USD"]
+      }
+    },
+    "vix": {
+      "provider": "CBOE via Yahoo Finance",
+      "ticker": "^VIX",
+      "coverage": "1990-present",
+      "frequency": "daily",
+      "cost": "FREE"
+    },
+    "fama_french": {
+      "provider": "Kenneth French Data Library",
+      "library": "pandas-datareader",
+      "coverage": "1926-present",
+      "frequency": "daily",
+      "cost": "FREE",
+      "factors": ["Mkt-RF", "SMB", "HML", "RMW", "CMA", "Mom"]
+    },
+    "treasury_rates": {
+      "provider": "Federal Reserve via Yahoo Finance",
+      "tickers": ["^IRX", "^FVX", "^TNX", "^TYX"],
+      "coverage": "1960s-present",
+      "frequency": "daily",
+      "cost": "FREE"
+    }
+  },
+  "universes": {
+    "sector_etfs": {
+      "name": "US Sector ETFs",
+      "count": 10,
+      "start_date": "2005-01-01",
+      "description": "Interpretable baseline universe covering all major US sectors"
+    },
+    "multiasset": {
+      "name": "Multi-Asset ETFs",
+      "count": 10,
+      "start_date": "2005-01-01",
+      "description": "Diversified asset classes including equities, bonds, commodities, and real estate"
+    },
+    "largecap_50": {
+      "name": "Large-Cap 50 Stocks",
+      "count": 50,
+      "start_date": "2000-01-01",
+      "description": "50 largest US stocks by market capitalization"
+    },
+    "crypto": {
+      "name": "Cryptocurrency Universe",
+      "count": 10,
+      "start_date": "2017-01-01",
+      "description": "Major cryptocurrencies for alternative asset analysis"
+    }
+  },
+  "crisis_events": {
+    "gfc_2008": "Global Financial Crisis (2008-09-01 to 2009-03-31)",
+    "flash_crash_2010": "Flash Crash (2010-05-06)",
+    "euro_crisis_2011": "European Debt Crisis (2011-07-01 to 2011-10-31)",
+    "china_deval_2015": "China Devaluation (2015-08-24)",
+    "volmageddon_2018": "Volmageddon (2018-02-05)",
+    "covid_2020": "COVID-19 Crash (2020-02-15 to 2020-04-30)",
+    "inflation_2022": "Inflation/Rate Shock (2022-01-01 to 2022-10-31)"
+  },
+  "data_quality": {
+    "missing_data_handling": "forward_fill",
+    "outlier_detection": true,
+    "corporate_actions": "adjusted_close",
+    "alignment": "intersection"
+  },
+  "caching": {
+    "enabled": true,
+    "location": "data/raw/",
+    "format": "csv",
+    "ttl_days": 1
+  }
+}
