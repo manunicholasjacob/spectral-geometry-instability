@@ -236,7 +236,7 @@ def compute_relative_eigengap(eigenvalues: np.ndarray, k: int) -> float:
 def compute_rolling_geometry_features(
     cov_matrices: Dict[pd.Timestamp, np.ndarray],
     top_k: int,
-    compute_eigengap: bool = True
+    include_eigengap: bool = True
 ) -> pd.DataFrame:
     """
     Compute rolling geometry features from covariance matrices.
@@ -246,7 +246,7 @@ def compute_rolling_geometry_features(
     Args:
         cov_matrices: Dictionary mapping dates to covariance matrices
         top_k: Number of top eigenvectors to use
-        compute_eigengap: Whether to compute eigengap metrics
+        include_eigengap: Whether to compute eigengap metrics
         
     Returns:
         DataFrame with geometry features indexed by date
@@ -272,7 +272,7 @@ def compute_rolling_geometry_features(
         }
         
         # Compute eigengap if requested
-        if compute_eigengap:
+        if include_eigengap:
             record["eigengap"] = compute_eigengap(eigenvalues, top_k)
             record["relative_eigengap"] = compute_relative_eigengap(eigenvalues, top_k)
         
