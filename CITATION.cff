@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software or its results, please cite it as below."
 title: "Spectral Geometry Instability: Covariance Eigenspace Rotation as a Structural Market-Risk Signal"
+doi: "10.5281/zenodo.22163333"
 authors:
   - family-names: "Jacob"
     given-names: "Manu Nicholas"
