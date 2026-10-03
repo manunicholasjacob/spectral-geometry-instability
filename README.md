@@ -3,6 +3,7 @@
 ## Eigenvector Instability as a Structural Risk Signal in Portfolio Allocation
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/manunicholasjacob/spectral-geometry-instability)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22163333.svg)](https://doi.org/10.5281/zenodo.22163333)
 
 ---
 
